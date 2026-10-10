@@ -1,0 +1,10 @@
+# Foquem em uma estrutura proposta!
+
+``text
+├── assets/          # Imagens e mídias usadas no projeto
+├── css/             # Arquivos de estilização (style.css)
+├── js/              # Arquivos de lógica em JavaScript (script.js)
+├── index.html       # Página principal do projeto
+├── LICENSE          # Licença do repositório
+└── README.md        # Documentação do projeto
+```
