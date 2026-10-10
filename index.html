@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Urna Eletrônica - 2º Turno (Browser SQL)</title></head>
+<body>
+  <main class="wrap">
+    <p class="notice"><strong>
+      <strong>Simulador </strong>Urna Eletrônica — Pressione <strong>F12</strong> e abra o <strong>Console</strong> para ver os comandos SQL e a apuração em cache local.<!--<a class="github-credits" href="https://github.com/rodrigogeorgino" target="_blank" rel="noopener noreferrer">
+        <svg class="github-icon" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+        </svg><span>@rodrigogeorgino</span></a>-->
+      </p>
+    <section class="device" aria-label="Simulador de urna eletrônica">
+      <div class="screen-frame">
+        <div class="screen" aria-live="polite">
+          <div class="screen-head">
+            <strong>JUSTIÇA ELEITORAL</strong>
+            <span>ELEIÇÕES 2026<br>2º TURNO</span>
+          </div>
+          <div class="label">SEU VOTO PARA</div>
+          <div class="office" id="office">PRESIDENTE</div>
+          <div class="number-label">NÚMERO:</div>
+          <div class="digits" id="digits" aria-label="Número digitado">
+            <span class="digit"></span><span class="digit"></span>
+          </div>
+          <div class="candidate" id="candidate">Digite 12 ou 22 para escolher seu candidato.</div>
+          <div class="prompt" id="prompt">Aperte os números no teclado.</div>
+        </div>
+      </div>
+
+      <div class="keyboard">
+        <div class="brand">TECLADO NUMÉRICO · <svg class="github-icon" viewBox="0 0 16 16" aria-hidden="true">
+          <a href="https://github.com/rodrigogeorgino"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+        </svg></div>
+        <div class="keys" aria-label="Teclado numérico">
+          <button class="key" onclick="digitar('1')" aria-label="1">1</button>
+          <button class="key" onclick="digitar('2')" aria-label="2">2</button>
+          <button class="key" onclick="digitar('3')" aria-label="3">3</button>
+          <button class="key" onclick="digitar('4')" aria-label="4">4</button>
+          <button class="key" onclick="digitar('5')" aria-label="5">5</button>
+          <button class="key" onclick="digitar('6')" aria-label="6">6</button>
+          <button class="key" onclick="digitar('7')" aria-label="7">7</button>
+          <button class="key" onclick="digitar('8')" aria-label="8">8</button>
+          <button class="key" onclick="digitar('9')" aria-label="9">9</button>
+          <span class="blank"></span>
+          <button class="key" onclick="digitar('0')" aria-label="0">0</button>
+          <span class="blank"></span>
+        </div>
+        <div class="actions">
+          <button class="action white" onclick="corrigir()">CORRIGE</button>
+          <button class="action orange" onclick="votoBranco()">BRANCO</button>
+          <button class="action green" onclick="confirmar()">CONFIRMA</button>
+        </div>
+      </div>
+    </section>
+    
+    <p class="help">
+      Utilize o teclado e clique em <strong>CONFIRMA</strong> para gravar o voto no banco SQL local.<br>
+      <a class="github-credits" href="https://github.com/rodrigogeorgino" target="_blank" rel="noopener noreferrer">
+        <svg class="github-icon" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+        </svg>
+        <span>@rodrigogeorgino</span>
+      </a>
+    </p>
+    <audio id="somConfirmacao" src="confirmacao_voto.mp3" preload="auto"></audio>
+  </main>
+  <!--<a class="github-credits" href="https://github.com/rodrigogeorgino" target="_blank" rel="noopener noreferrer">
+        <svg class="github-icon" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+        </svg>
+        <span>@rodrigogeorgino</span></a>-->
+</body>
+</html>
